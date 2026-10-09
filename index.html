@@ -55,6 +55,38 @@
             top: 24px;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
+
+        /* Homepage achievements preview: independent of compiled Tailwind utilities. */
+        .achievements-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .achievements-preview-card {
+            display: block;
+            min-width: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            border: 1px solid #1e293b;
+            background: #0f172a;
+            text-decoration: none;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .achievements-preview-card:hover {
+            border-color: #d97706;
+            transform: translateY(-3px);
+        }
+        .achievements-preview-card img {
+            display: block;
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+        .achievements-preview-card-copy { padding: 1.25rem; }
+        @media (max-width: 767px) {
+            .achievements-preview-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .achievements-preview-card img { height: 190px; }
+        }
     </style>
     <!-- Precompiled Tailwind CSS; same cascade order as the original generated stylesheet. -->
     <link rel="stylesheet" href="styles.css">
@@ -396,18 +428,18 @@
                 <div class="w-20 h-1 bg-gold-500 mx-auto mt-6 mb-6"></div>
                 <p class="text-gray-400 text-lg leading-relaxed font-light">Discover performances in Ukraine and Dubai, musical projects and festivals, and the inspiring journeys of Kateryna's students.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-                <a href="achievements.html" class="block bg-navy-900 border border-navy-800 rounded-xl overflow-hidden hover:border-gold-500/50 transition-colors duration-300 group">
-                    <img src="achievements-images/performance-ukraine-1.webp" alt="Musical performance in Ukraine" loading="lazy" decoding="async" class="w-full h-48 object-cover">
-                    <div class="p-5"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">On Stage</h3><p class="text-gray-400 text-sm mt-2">Concerts and performances</p></div>
+            <div class="achievements-preview-grid mb-10">
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/performance-ukraine-1.webp" alt="Musical performance in Ukraine" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">On Stage</h3><p class="text-gray-400 text-sm mt-2">Concerts and performances</p></div>
                 </a>
-                <a href="achievements.html" class="block bg-navy-900 border border-navy-800 rounded-xl overflow-hidden hover:border-gold-500/50 transition-colors duration-300 group">
-                    <img src="achievements-images/festivals-1.webp" alt="Music festival and workshop" loading="lazy" decoding="async" class="w-full h-48 object-cover">
-                    <div class="p-5"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Musical Projects</h3><p class="text-gray-400 text-sm mt-2">Festivals and workshops</p></div>
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/festivals-1.webp" alt="Music festival and workshop" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Musical Projects</h3><p class="text-gray-400 text-sm mt-2">Festivals and workshops</p></div>
                 </a>
-                <a href="achievements.html" class="block bg-navy-900 border border-navy-800 rounded-xl overflow-hidden hover:border-gold-500/50 transition-colors duration-300 group">
-                    <img src="achievements-images/students-concert-2023.webp" alt="Kateryna's students at a concert in Dubai" loading="lazy" decoding="async" class="w-full h-48 object-cover">
-                    <div class="p-5"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Student Success</h3><p class="text-gray-400 text-sm mt-2">Young musicians in the spotlight</p></div>
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/students-concert-2023.webp" alt="Kateryna's students at a concert in Dubai" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Student Success</h3><p class="text-gray-400 text-sm mt-2">Young musicians in the spotlight</p></div>
                 </a>
             </div>
             <div class="text-center">
