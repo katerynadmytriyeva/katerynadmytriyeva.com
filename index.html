@@ -55,6 +55,42 @@
             top: 24px;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
+
+        /* Homepage achievements preview: independent of compiled Tailwind utilities. */
+        .achievements-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+        .achievements-preview-card {
+            display: block;
+            min-width: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            border: 1px solid #1e293b;
+            background: #0f172a;
+            text-decoration: none;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .achievements-preview-card:hover {
+            border-color: #d97706;
+            transform: translateY(-3px);
+        }
+        .achievements-preview-card img {
+            display: block;
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+        /* Reframe the first preview around Kateryna's face and guitar. */
+        .achievements-preview-card img[src$="performance-ukraine-1.webp"] {
+            object-position: 72% 36%;
+        }
+        .achievements-preview-card-copy { padding: 1.25rem; }
+        @media (max-width: 767px) {
+            .achievements-preview-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .achievements-preview-card img { height: 190px; }
+        }
     </style>
     <!-- Precompiled Tailwind CSS; same cascade order as the original generated stylesheet. -->
     <link rel="stylesheet" href="styles.css">
@@ -76,7 +112,7 @@
                     <a href="#about" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Profile</a>
                     <a href="#experience" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Experience</a>
                     <a href="#education" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Education</a>
-                    <a href="achievements.html" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Achievements</a>
+                    <a href="#achievements-preview" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Achievements</a>
                     <a href="#contact" class="text-gray-300 hover:text-gold-400 transition-colors text-sm uppercase tracking-wider font-medium">Contact</a>
                 </div>
                 
@@ -96,7 +132,7 @@
                 <a href="#about" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Profile</a>
                 <a href="#experience" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Experience</a>
                 <a href="#education" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Education</a>
-                <a href="achievements.html" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Achievements</a>
+                <a href="#achievements-preview" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Achievements</a>
                 <a href="#contact" class="mobile-link text-gray-300 hover:text-gold-400 hover:bg-navy-900 block px-3 py-3 rounded-md text-base font-medium uppercase tracking-wider transition-colors">Contact</a>
             </div>
         </div>
@@ -384,6 +420,35 @@
             <p class="text-gray-400 font-light text-lg leading-relaxed max-w-3xl mx-auto">
                 Kateryna has guided students through examinations, annual concerts and music competitions, helping them develop both instrumental skills and a lasting appreciation of music.
             </p>
+        </div>
+    </section>
+
+    <!-- Featured portfolio: visible on the homepage without opening the navigation menu. -->
+    <section id="achievements-preview" class="py-24 bg-navy-950 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-gold-500 font-medium tracking-[0.1em] uppercase text-sm">Beyond the Classroom</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-bold mt-2 text-white">Musical <span class="text-gold-500">Achievements</span></h2>
+                <div class="w-20 h-1 bg-gold-500 mx-auto mt-6 mb-6"></div>
+                <p class="text-gray-400 text-lg leading-relaxed font-light">Discover performances in Ukraine and Dubai, musical projects and festivals, and the inspiring journeys of Kateryna's students.</p>
+            </div>
+            <div class="achievements-preview-grid mb-10">
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/performance-ukraine-1.webp" alt="Musical performance in Ukraine" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">On Stage</h3><p class="text-gray-400 text-sm mt-2">Concerts and performances</p></div>
+                </a>
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/festivals-1.webp" alt="Music festival and workshop" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Musical Projects</h3><p class="text-gray-400 text-sm mt-2">Festivals and workshops</p></div>
+                </a>
+                <a href="achievements.html" class="achievements-preview-card group">
+                    <img src="achievements-images/students-concert-2023.webp" alt="Kateryna's students at a concert in Dubai" loading="lazy" decoding="async" >
+                    <div class="achievements-preview-card-copy"><h3 class="font-serif text-xl text-white group-hover:text-gold-400 transition-colors">Student Success</h3><p class="text-gray-400 text-sm mt-2">Young musicians in the spotlight</p></div>
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="achievements.html" class="inline-block px-8 py-3 bg-gold-600 hover:bg-gold-500 text-white rounded font-medium transition-all duration-300 shadow-[0_0_20px_rgba(217,119,6,0.3)]">Explore My Musical Journey <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i></a>
+            </div>
         </div>
     </section>
 
