@@ -1,0 +1,14 @@
+INTEGRATION MUSICAL ACHIEVEMENTS — KATERYNA DMYTRIYEVA
+
+Ce ZIP contient la nouvelle page et ses 20 photos. Il ne remplace PAS index.html ni styles.css.
+
+1. Dans GitHub Desktop, passer sur main et recuperer les dernieres modifications (Fetch/Pull).
+2. Creer une branche, par exemple feature/musical-achievements.
+3. Copier achievements.html et le dossier achievements-images/ a la racine du depot local, a cote de index.html.
+4. Dans index.html, ajouter un lien vers achievements.html dans la navigation desktop ET mobile. Conserver tous les liens existants.
+5. Tester en local : page d'accueil, nouvelle page, photos, retour, lien Contact, mobile.
+6. Commit, Push, puis Pull Request vers main. Ne fusionner qu'apres validation.
+
+La page achievements.html renvoie deja vers index.html et index.html#contact.
+Le CSS de la nouvelle page est autonome et ne change pas le styles.css existant.
+Les photos sont extraites du PDF compresse.
