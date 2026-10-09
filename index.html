@@ -10,8 +10,6 @@
     <title>Kateryna Dmytriyeva | Guitar & Piano Teacher in Dubai</title>
     <meta name="description" content="Private guitar, piano and music theory lessons in Dubai with Kateryna Dmytriyeva, musician and educator with nearly 20 years of teaching experience.">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Playfair Display (Serif/Classic) and Inter (Sans-serif/Modern) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,30 +19,6 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        navy: {
-                            800: '#1a202c',
-                            900: '#0f172a',
-                            950: '#020617',
-                        },
-                        gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         /* Custom Styles for Animations and Accents */
         body {
@@ -60,8 +34,9 @@
         }
 
         .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
+            /* Content remains visible without JavaScript or if enhancement fails. */
+            opacity: 1;
+            transform: translateY(0);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
@@ -81,6 +56,8 @@
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
     </style>
+    <!-- Precompiled Tailwind CSS; same cascade order as the original generated stylesheet. -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="font-sans antialiased overflow-x-hidden">
 
@@ -510,36 +487,36 @@
                 }
             });
 
-            // Intersection Observer for scroll animations (fade-in-up)
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            const animatableElements = document.querySelectorAll('.fade-in-up');
-            animatableElements.forEach(el => {
-                observer.observe(el);
-            });
-            
-            // Trigger animations for elements already in view on load
-            setTimeout(() => {
-                animatableElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight) {
-                        el.classList.add('visible');
-                    }
-                });
-            }, 100);
+            // Progressive enhancement: never hide content with a persistent class.
+            // Browser-owned animations finish even if later JavaScript fails.
+            if ('IntersectionObserver' in window && 'animate' in Element.prototype) {
+                let observer;
+                try {
+                    observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (!entry.isIntersecting) return;
+                            observer.unobserve(entry.target);
+                            try {
+                                const delay = parseFloat(getComputedStyle(entry.target).transitionDelay) * 1000 || 0;
+                                entry.target.animate([
+                                    { opacity: 0, transform: 'translateY(30px)' },
+                                    { opacity: 1, transform: 'translateY(0)' }
+                                ], {
+                                    duration: 800,
+                                    easing: 'ease-out',
+                                    delay,
+                                    fill: 'backwards'
+                                });
+                            } catch (error) {
+                                // The underlying CSS already shows the complete content.
+                            }
+                        });
+                    }, { root: null, rootMargin: '0px', threshold: 0.1 });
+                    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+                } catch (error) {
+                    if (observer) observer.disconnect();
+                }
+            }
         });
     </script>
 </body>
