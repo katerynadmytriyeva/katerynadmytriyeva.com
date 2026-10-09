@@ -498,8 +498,11 @@
                             observer.unobserve(entry.target);
                             try {
                                 const delay = parseFloat(getComputedStyle(entry.target).transitionDelay) * 1000 || 0;
+                                // Never hide a block that has already entered the viewport.
+                                const rect = entry.target.getBoundingClientRect();
+                                const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
                                 entry.target.animate([
-                                    { opacity: 0, transform: 'translateY(30px)' },
+                                    { opacity: alreadyVisible ? 1 : 0, transform: 'translateY(30px)' },
                                     { opacity: 1, transform: 'translateY(0)' }
                                 ], {
                                     duration: 800,
@@ -511,7 +514,7 @@
                                 // The underlying CSS already shows the complete content.
                             }
                         });
-                    }, { root: null, rootMargin: '0px', threshold: 0.1 });
+                    }, { root: null, rootMargin: '0px 0px 100px 0px', threshold: 0 });
                     document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
                 } catch (error) {
                     if (observer) observer.disconnect();
